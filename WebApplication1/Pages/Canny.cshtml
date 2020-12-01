@@ -1,0 +1,40 @@
+﻿@page
+@model CannyModel
+@{
+    ViewData["Title"] = "Canny Sample";
+}
+<h1>@ViewData["Title"]</h1>
+
+
+<form enctype="multipart/form-data" method="post">
+    <div>
+        <p>
+            <label for="file_picker">Image File</label>
+            <input asp-for="FileUpload.FormFile" type="file" id="file_picker" accept=".jpg,.png,.bmp" />
+            <span asp-validation-for="FileUpload.FormFile"></span>
+        </p>
+        <p>
+            <label for="threshold1">Threshold 1</label>
+            <input asp-for="Threshold1" type="number" id="threshold1" min="0" max="255" value="@Model.Threshold1" />
+        </p>
+        <p>
+            <label for="threshold2">Threshold 2</label>
+            <input asp-for="Threshold2" type="number" id="threshold2" min="0" max="255" value="@Model.Threshold2" />
+        </p>
+    </div>
+    <div>
+        <input asp-page-handler="Upload" type="submit" value="Upload" />
+    </div>
+</form>
+
+<!--ここに結果が出る-->
+<div style="display: table; margin-top: 30px;">
+    <ul>
+        <li style="display: table-cell;">
+            <img src="data:image/png;base64,@Model.SourceBase64"/>
+        </li>
+        <li style="display: table-cell;">
+            <img src="data:image/png;base64,@Model.ResultBase64"/>
+        </li>
+    </ul>
+</div>

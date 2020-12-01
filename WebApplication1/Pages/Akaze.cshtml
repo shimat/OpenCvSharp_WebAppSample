@@ -1,0 +1,40 @@
+﻿@page
+@model AkazeModel
+@{
+    ViewData["Title"] = "Akaze Image Matching Sample";
+}
+<h1>@ViewData["Title"]</h1>
+
+
+<form enctype="multipart/form-data" method="post">
+    <div>
+        <p>
+            <label for="file_picker1">Image File 1</label>
+            <input asp-for="FileUpload1.FormFile" type="file" id="file_picker1" accept=".jpg,.png" />
+            <span asp-validation-for="FileUpload1.FormFile"></span>
+        </p>
+        <p>
+            <label for="file_picker2">Image File 2</label>
+            <input asp-for="FileUpload2.FormFile" type="file" id="file_picker2" accept=".jpg,.png" />
+            <span asp-validation-for="FileUpload2.FormFile"></span>
+        </p>
+    </div>
+    <div>
+        <input asp-page-handler="Upload" type="submit" value="Upload" />
+    </div>
+</form>
+
+<!--ここに結果が出る-->
+<div style="display: table; margin-top: 30px;">
+    <ul>
+        <li style="display: table-cell;">
+            <img src="data:image/png;base64,@Model.Source1Base64" />
+        </li>
+        <li style="display: table-cell;">
+            <img src="data:image/png;base64,@Model.Source2Base64" />
+        </li>
+    </ul>
+</div>
+<div>
+    <img src="data:image/png;base64,@Model.ResultBase64" />
+</div>
